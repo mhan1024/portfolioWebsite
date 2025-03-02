@@ -1,0 +1,101 @@
+<head>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Set Up</title>
+
+    <!-- Style Sheet Connection -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- Link to JavaScript code -->
+    <script src="./server.js"></script>
+    <!-- Link to JavaScript (ADDITIONAL FUNCTIONALITY) code -->
+    <script src="./helper.js"></script>
+
+    <script src="https://smtpjs.com/v3/smtp.js">
+</head>
+
+<body>
+    <header>
+        <div class="tabOuter">
+            <%- include('./nav_bar') %>
+            
+        </div>
+    </header>
+    
+    <h1>SET UP</h1>
+    <div class="form_outer">
+        <form action="/setup" method="post" class="setupForm">
+            <section>
+                <div class="form_elements">
+                    <input type="text" id="projectName" name="projectName" placeholder="Project Name" autocomplete="off" required>
+                    <br>
+    
+                    <!-- Drop-down selection and allows for custom option -->
+                    <input list="lang_options" id="projectLang" name="projectLang" placeholder="Project Language" autocomplete="off" required>
+                    <datalist id="lang_options">
+                        <option value="Java">
+                        <option value="Python">
+                        <option value="C/C++">
+                        <option value="C#">
+                        <option value="SQL">
+                        <option value="Swift">
+                        <option value="Kotlin">
+                        <option value="Ruby">
+                    </datalist>
+                    <br>
+
+                    <!-- Tools form element -->
+                    <div id="toolForm">
+                        <input list="tool_options" id="tools" name="tools" placeholder="Tool" autocomplete="off" required>
+                        <datalist id="tool_options">
+                            <option value="VSCode">
+                            <option value="Eclipse">
+                            <option value="Jupyter Notebook">
+                            <option value="Anaconda">
+                            <option value="XCode">
+                            <option value="Android Studio">
+                            <option value="Docker">
+                            <option value="Unity">
+                        </datalist>
+                        <br>
+                    </div>
+    
+                    <div class="inline_tool_buttons">
+                        <button type="button" class="add_tool" id="add_tool" onclick="addTool()">Add Tool</button>
+                        <button type="button" class="remove_tool" id="remove_tool" onclick="removeTool()">Remove Tool</button>
+                    </div>
+                    <br>
+
+                    <!-- Topics form element -->
+                    <div id="topicForm">
+                        <input type="text" id="topics" name="topics" placeholder="Topic" required>
+                        <br>
+                    </div>
+    
+                    <div class="inline_topic_buttons">
+                        <button type="button" class="add_topic" id="add_topic" onclick="addTopic()">Add Topic</button>
+                        <button type="button" class="remove_topic" id="remove_topic" onclick="removeTopic()">Remove Topic</button>
+                    </div>
+                    <br>
+    
+                    <input type="text" id="briefDesc" name="briefDesc" placeholder="Brief Project Description" required>
+                    <br>
+    
+                    <textarea id="longDesc" name="longDesc" placeholder="Detailed Explanation" required></textarea>
+                    <br>
+    
+                    <input type="text" id="link" name="link" placeholder="Link">
+                    <br>
+    
+    
+                    <input type="submit">
+                </div>
+            </section>
+        </form>
+    
+        <form action="/setup-removeAll" method="post" class="remove_all">
+            <input type="submit" value="Remove All">
+        </form>
+    </div>
+    
+</body>
+

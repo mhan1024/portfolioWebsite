@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact</title>
+
+    <!-- Style Sheet Connection -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- Link to JavaScript code -->
+    <script src="./server.js"></script>
+    <!-- Link to JavaScript (ADDITIONAL FUNCTIONALITY) code -->
+    <script src="./helper.js"></script>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+</head>
+
+<body id="contact_body">
+    <header>
+        <div class="tabOuter">
+            <%- include('./nav_bar') %>
+        </div>
+    </header>
+
+    <div id="oven_outer">
+        <div id="oven_inner">
+            <div id="oven_dials">
+                <button type="button" id="contact_form" onclick='changeWindow(1)'>Contact</button>
+                <button type="button" id="send_resume" onclick='changeWindow(2)'>Resume</button>
+                <button type="button" id="social_links" onclick='changeWindow(3)'>Socials</button>
+            </div>
+    
+            <hr>
+    
+            <div id="oven_handle" onclick='resetWindow()'>
+                <span class="circle"></span>
+                <hr id="handle_bar">
+                <span class="circle"></span>
+            </div>
+    
+            <div id="oven_window">
+                <hr class="streak">
+                <hr class="streak2">
+            </div>
+        </div>
+        
+        <div id="oven_bottom">
+            <div id="left_foot"></div>
+            <div id="right_foot"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function sendEmail() {
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "sender@email_address.com",
+                Password: "Enter your password",
+                To: 'receiver@email_address.com',
+                From: "sender@email_address.com",
+                Subject: "Sending Email using javascript",
+                Body: "Well that was easy!!",
+                Attachments: [
+                    {
+                        name: "File_Name_with_Extension",
+                        path: "Full Path of the file"
+                    }]
+            })
+                .then(function (message) {
+                    alert("Mail has been sent successfully")
+                });
+        }
+    </script>
+</body>
+
+</html>

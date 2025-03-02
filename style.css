@@ -1,0 +1,535 @@
+/* Tab header */
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #9DD9D2;  
+}
+
+.tabOuter {
+    display: flex;
+    justify-content: center;  
+} 
+
+.tabInner {
+    background-color: #F4D06F;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center; 
+    justify-content: space-evenly;
+
+    border-radius: 15px;
+}
+
+.tabInner input[type="button"] {
+    background-color: #F4D06F;
+    border-style: none;
+    font-size: 18px;
+    padding: 1rem;
+
+    border-radius: 15px;
+}
+
+.tabInner input[type="button"]:hover {
+    text-decoration: underline;
+
+    border-radius: 15px;
+}
+
+
+/* Carousel slides */
+.slideshow-container {
+    display: flex;
+    justify-content: space-around;
+
+    /* height: 25rem; */
+}
+
+.cards {
+    background-color: #fff8f0;
+    width: 30%;
+    height: 55%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.card-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: fit-content;
+
+    text-decoration: none;
+
+    padding: 1.5rem;
+}
+
+.img-button {
+    background-color: #fff8f0;
+    border-style: none;
+    border-radius: 10px;
+
+}
+
+.img-button:hover {
+    background-color: #392F5A;
+    border-style: none;
+    border-radius: 10px;
+}
+
+.img-button > img {
+    height: 12.5rem;
+}
+
+.project-title, .project-lang, .project-desc {
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+}
+
+.project-lang, .project-desc {
+    margin-left: 0rem;
+}
+
+.project-lang {
+    background-color: #FF8811;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+
+.project-info {
+    margin-left: 1.5rem;
+}
+
+#prev_button, #next_button {
+    border-style: none;
+    background: none;
+    color: #392F5A;
+}
+
+#prev_button:hover, #next_button:hover {
+    background-color: #392F5A;
+    color: #fff8f0;
+    border-radius: 15px;
+}
+
+/* Overlay -> "back of card" to display more info about proj clicked*/
+#overlay {
+    position: fixed;
+    display: none;
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 2;
+
+    background: linear-gradient(#F4D06F, #FF8811);
+  
+}
+
+#overlay > h1 {
+    color: #fff8f0;
+}
+
+#inner_proj {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    
+}
+
+.inner {
+    margin: 5rem;
+    height: 75%;
+    /* width: 100%; */
+    background-color: #fff8f0;
+
+    border-radius: 15px;
+}
+
+.in-line-title, .in-line-sub-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.in-line-sub-title {
+    height: 80%;
+}
+
+.in-line-title > h1, p {
+    color: #392F5A;
+    margin-left: 1.5rem;
+}
+
+.in-line-stack {
+    margin-right: 1.5rem;
+}
+
+.tools {
+    width: 15%;
+} 
+
+.description {
+    width: 85%;
+}
+
+.tools > h3, .description > h3 {
+    color: #392F5A;
+    margin-left: 1.5rem;
+}
+
+.vertical-line {
+    border-left: 2px solid #392F5A;
+}
+
+/* SET UP page */
+.form_outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.setupForm input[type="text"], .setupForm input{
+    background-color: #fff8f0;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+#tools, #topics {
+    margin-bottom: 0.25rem;
+}
+
+#briefDesc {
+    width: 10rem;
+}
+
+#longDesc {
+    background-color: #fff8f0;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+.form_elements {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.setupForm input[type="submit"], .remove_all input[type="submit"]{
+    width: 7.5rem;
+    height: 2.5rem;
+}
+
+.setupForm input[type="submit"], .remove_all input[type="submit"], .inline_tool_buttons > button, .inline_topic_buttons > button {
+    background-color: #F4D06F;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.setupForm input[type="submit"]:hover, .remove_all input[type="submit"]:hover, .inline_tool_buttons > button:hover, .inline_topic_buttons > button:hover {
+    background-color: #FF8811;
+}
+
+/* ABOUT page */
+#about_body {
+    background-color: #392F5A;
+}
+
+#about_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+
+    /* height: 200%; */
+}
+
+#about_left {
+    /* height: 100vh; */
+    width: 30%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#about_right {
+    margin-top: 2rem;
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.collapsible_button {
+    background-color: #392F5A;
+    border: solid 2px #9DD9D2;
+    color: #fff8f0;
+
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+  
+.active, .collapsible_button:hover {
+    background-color: #9DD9D2;
+    color: #392F5A;
+}
+  
+.collapsible_content {
+    background-color: #fff8f0;
+    color: #392F5A;
+    
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    
+}
+
+.collapsible_content_inner {
+    margin: 1.5rem;
+    border: dotted 2px #FF8811;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.collapsible_content_inner > p, a {
+    color: #392F5A;
+} 
+
+#about_left > h1, #about_right > h1 {
+    color: #fff8f0;
+}
+
+#joke_button {
+    background-color: #392F5A;
+    color: #fff8f0;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+/* CONTACT page */
+#contact_body {
+    background-color: #392F5A;
+}
+
+#oven_outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 2.5rem;
+}
+
+#oven_inner {
+    width: 90%;
+    height: 40rem;
+
+    display: block;
+    background-color: #fff8f0;
+
+    border-radius: 15px;
+}
+
+#oven_dials {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#contact_form, #send_resume, #social_links {
+    background-color: #392F5A;
+    color: #fff8f0;
+    padding: 1.5% 1.5%;
+    border-radius: 80%;
+    border: none;
+}
+
+#contact_form:hover, #send_resume:hover, #social_links:hover {
+    scale: 75%;
+}
+
+#oven_inner > hr {
+    border: solid 0.5px #392F5A;
+}
+
+#oven_handle {
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+#handle_bar {
+    width: 50%;
+    border: none;
+    background-color: #392F5A;
+    margin-left: -1rem;
+    margin-right: -1rem;
+
+    z-index: 2;
+}
+
+.circle {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-color: #392F5A;
+    border-radius: 75%;
+    z-index: 3;
+}
+
+#oven_window {
+    height: 60%;
+    width: 75%;
+    background-color: #9DD9D2;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    position: relative;
+}
+
+.streak {
+    z-index: 12;
+    position: absolute;
+
+    height: 0.25rem;
+    width: 45%;
+    background-color: #fff8f0;
+    border: none;
+
+    rotate: 20deg;
+
+    margin-top: 10rem;
+    margin-left: 5rem;
+    margin-bottom: 15rem;
+}
+
+.streak2 {
+    z-index: 12;
+    position: absolute;
+
+    height: 0.25rem;
+    width: 60%;
+    background-color: #fff8f0;
+    border: none;
+
+    rotate: 20deg;
+
+    margin-top: 5rem;
+}
+
+#contact_form_box, #resume_form_box {
+    /* background-color: #fff8f0; */
+    height: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* margin-bottom: auto; */
+
+}
+
+#contact_form_box > h2, #resume_form_box > h2, #socials_box > h2 {
+    color: #392F5A;
+}
+
+#contact_form_box > input, #contact_form_box > textarea, #resume_form_box > input, #resume_inline > input {
+    background-color: #fff8f0;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+
+}
+
+#contact_form_box > input[type="submit"], #resume_form_box > input[type="button"], #resume_inline > input[type="button"] {
+    background-color: #392F5A;
+    color: #fff8f0;
+}
+
+#socials_box {
+    height: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#oven_bottom {
+    width: 90%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#left_foot {
+    height: 1.5rem;
+    width: 5rem;
+    background-color: #FF8811;
+
+    border-radius: 0 0 15px 15px;
+
+    margin-left: 1rem;
+}
+
+#right_foot {
+    height: 1.5rem;
+    width: 5rem;
+    background-color: #FF8811;
+
+    border-radius: 0 0 15px 15px;
+    
+    margin-right: 1rem;
+}

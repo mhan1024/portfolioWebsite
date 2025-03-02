@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About</title>
+
+    <!-- Style Sheet Connection -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- Link to JavaScript code -->
+    <script src="./server.js"></script>
+    <!-- Link to JavaScript (ADDITIONAL FUNCTIONALITY) code -->
+    <script src="./helper.js"></script>
+</head>
+
+<body id="about_body">
+    <header>
+        <div class="tabOuter">
+            <%- include('./nav_bar') %>
+        </div>
+    </header>
+    
+    <div id="about_outer">
+        <div id="about_inner">
+
+            <div id="about_left">
+                <h1>nice to meet you!</h1>
+            </div>
+    
+            <div id="about_right">
+                <button type="button" class="collapsible_button" onclick="expandMenu(0)">
+                    &#128214; My Story
+                </button>
+                <div class="collapsible_content">
+                    <div class="collapsible_content_inner">
+                        <p>I am a Computer Science major at the University of Maryland College Park, with a passion in web and mobile development, AI, and cybersecurity. With my strong foundation in object-oriented programming, I enjoy tackling challenges with scalable and efficient solutions. Additionally, I have a keen interest in exploring new programming languages and studying their unique behaviors and applications.</p>
+    
+                        <p>During my internship at Infor, I authored comprehensive written tutorials demonstrating InforOS applications, and I fine-tuned an AI model to resolve content consistency issues on Infor&#39;s Developer Portal, ensuring uniformity across all published materials.</p>
+    
+                        <p>In addition to academic and internship experiences, I dedicate time to personal projects where I apply previously learned concepts and skills, explore new technologies, and develop practical applications.</p>
+                        
+                        <p>Check out the &ldquo;<a href="/projects">Projects</a>&rdquo; section for more information.</p>
+                    </div>
+                </div>
+    
+                <button type="button" class="collapsible_button" onclick="expandMenu(1)">
+                    &#128640; Aspirations
+                </button>
+                <div class="collapsible_content">
+                    <div class="collapsible_content_inner">
+                        <p>Although I followed the general path in Computer Science, I am eager to explore its diverse fields, ranging from AI and cybersecurity to web and mobile development. I am particularly excited by the opportunities AI brings and look forward to diving deeper into innovations in this area. BREIFLY MENTION PROJECT PERTAINING TO THIS STATEMENT. HYPERLINK? Additionally, I aspire to work on projects that not only challenge me technically, but also have a positive and meaningful impact on society.</p>
+    
+                        <p>I am currently seeking roles that challenge me to leverage my skills in object-oriented programing, AI, web and mobile development, and cybersecurity in a collaborative environment. I look forward to working in a creative and friendly environment where I can continue to learn and grow BY tacklING NEW challenges, and contribute to meaningful projects.</p>
+                    </div>
+                </div>
+    
+                <button type="button" class="collapsible_button" onclick="expandMenu(2)">
+                    &#129327; Random Facts
+                </button>
+                <div class="collapsible_content">
+                    <div class="collapsible_content_inner">
+                        <p>Outside of programming, I enjoy cooking and baking, drawing, and reading.</p>
+                        <p>A fun fact: I drew some of my favorite things to bake and made them into icons in the &ldquo;Projects&rdquo; section.</p>
+                        <p>My favorite thing to bake is chocolate chip cookies, but with a twist: molten lava chocolate chip cookies.</p>
+                        <p>Reading is a new hobby of mine and currently, I am loving sci-fantasy and fantasy genres. Here are a few of my top choices:
+                            <ol>
+                                <li>Ready Player One</li>
+                                <li>Fourth Wing</li>
+                                <li>Six of Crows</li>
+                                <li>One Dark Window</li>
+                                <li>The Unbecoming of Mara Dyer</li>
+                            </ol>
+                        </p>
+                        <p>I love listening to music and true crime podcasts while coding, exercising or engaging in other hobbies. My music taste range from Mando-pop and K-pop to alternative, and indie pop. As for podcasts, I especially enjoy Stephanie Soo's Rotten Mango.</p>
+                        <p>Additionally, being bilingual in English and Mandarin, I also enjoy watching C-dramas and other shows in my free time. But, I also watch animes (Death Note and Sword Art Online being my favorites), K-dramas, and anything with a captivating story, such as Avatar the Last Airbender, Arcane, and Friends.</p>
+    
+                        <p>Corny dad jokes are one of my favorite things and will always brighten my day. So, I implemented a dad jokes API. Feel free to get a dad joke by clicking on the button below.</p>
+    
+                        <div id="joke_box">
+                            <p><%- joke %></p>
+                            <button type="button" id="joke_button" onclick='getJokeHelper()'>
+                                New Joke
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+
+    
+
+</body>
+<html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style Sheet Connection -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- Link to JavaScript code -->
+    <script src="./server.js"></script>
+    <!-- Link to JavaScript (ADDITIONAL FUNCTIONALITY) code -->
+    <script src="./helper.js"></script>
+</head>
+
+<body>
+    <div class="tabInner">
+        <!-- Home  -->
+        <a href="/"><input type="button" value="Home" id="homeTab"></a>
+        <!-- About -->
+        <a href="/about"><input type="button" value="About Me" id="aboutTab"></a>
+        <!-- Projects -->
+        <a href="/projects"><input type="button" value="Projects" id="projectsTab"></a>
+        <!-- Contact -->
+        <a href="/contact"><input type="button" value="Contact Me" id="contactTab" onclick='contactInstructions()'></a>
+        <!-- Set up (hide later) -->
+        <a href="/setup"><input type="button" value="Set Up" id="setUpTab"></a>
+
+    </div>
+       
+</body>
+
+</html>
