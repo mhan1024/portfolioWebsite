@@ -225,9 +225,7 @@ function expandMenu(num) {
 }
 /* ************************************************************************** */
 /* Contact page: */
-function contactInstructions() {
-    alert(`Click on handle bar to "close" oven door after opening :)`);
-}
+
 /* Adds functionality for the "oven" (tab gallery), so that when a "dial" (button) is clicked, the corresponding information will be displayed in the "oven window".
     1 = Contact form (leave a message)
     2 = Send a copy of resume to user (employer)
@@ -235,49 +233,52 @@ function contactInstructions() {
 function changeWindow(dialNum) {
     // Orange: FF8811
     // Yellow: F4D06F
-    // alert(`Click on handle bar to "close" oven door :)`);
+    alert(`Click on handle bar to "close" oven door :)`);
     let window = document.querySelector("#oven_window");
     window.style.backgroundColor = "#FF8811";
 
     switch (dialNum) {
         case 1:
-            window.innerHTML = `<form action="/contact-form" method="post" id="contact_form_box">
+            window.innerHTML = `<div id="contact_form_box">
                                     <h2>Get in Touch</h2>
-                                    <input type="text" id="contact_name" name="contact_name" placeholder="Name">
-                                    <br>
 
-                                    <input type="email" id="contact_email" name="contact_email" placeholder="Email">
-                                    <br>
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-paper-plane-o"></i>
+                                            <p>mhan10242019@gmail.com</p>
+                                        </li>
 
-                                    <input type="text" id="contact_subject" name="contact_subject" placeholder="Subject">
-                                    <br>
-
-                                    <textarea id="contact_message" name="contact_message" placeholder="Message"></textarea>
-                                    <br>
-
-                                    <input type="submit" value="Send" onclick="thanksAlert()">
-                                </form>`;
+                                        <li>
+                                            <i class="fa fa-phone-square"></i>
+                                            <p>443-535-3782</p>
+                                        </li>
+                                    </ul>
+                                </div>`;
             break;
         case 2:
-            window.innerHTML = `<form id="resume_form_box">
+            window.innerHTML = `<div id="resume_form_box">
                                     <h2>Resume Options</h2>
-                                    <input type="button" value="Preview" onclick="previewResume()">
+                                    <button type="button" value="Preview" id="preview_button">
+                                        <a href="./Michelle_Han.pdf" target="_blank">Preview</a>
+                                    </button>
                                     <br>
                             
-                                    <input type="button" value="Download" onclick="downloadResume()">
+                                    <button type="button" value="Download" id="download_button">
+                                        <a href="./Michelle_Han.pdf" download="Michelle_Han_Resume">Download</a>
+                                    </button>
                                     <br>
                             
-                                    <div id="resume_inline">
-                                        <input type="email" id="resume_email" name="resume_email" placeholder="Email">
-                                        <input type="button" value="Send" onclick="sendResume()">
-                                    </div>
-                                </form>`;
+                                </div>`;
             break;
         case 3:
             window.innerHTML = `<div id="socials_box">
                                     <h2>Social Media</h2>
-                                    <button type="button" class="social_media_buttons" id="linkedin_button">LINKEDIN</button>
-                                    <button type="button" class="social_media_buttons" id="github_button">GITHUB</button>
+
+                                    <a href="https://www.linkedin.com/in/michelle-han-2a2629279" target="_blank" class="fa fa-linkedin"></a>
+
+                                    <br>
+
+                                    <a href="https://github.com/mhan1024" target="_blank" class="fa fa-github"></a>
                                 </div>`;
             break;
         default:
@@ -292,43 +293,8 @@ function resetWindow() {
     window.style.backgroundColor = "#9DD9D2";
 }
 
-function thanksAlert() {
-    alert("Thanks for reaching out! Your message has been received and I will get back to you as soon as possible!");
+/* ************************************************************************** */
+/* Welcome page: */
+function contactPage() {
+    window.location.href = "/contact?dialNum=2";
 }
-
-
-function previewResume() {
-    alert("TO DO");
-}
-
-function downloadResume() {
-    alert("TO DO");
-}
-
-function sendResume() {
-    alert("TO DO");
-}
-
-
-
-// async function sendSimpleMessage() {
-//   const mailgun = new Mailgun(FormData);
-//   const mg = mailgun.client({
-//     username: "api",
-//     key: process.env.API_KEY || "API_KEY",
-//     // When you have an EU-domain, you must specify the endpoint:
-//     // url: "https://api.eu.mailgun.net/v3"
-//   });
-//   try {
-//     const data = await mg.messages.create("sandboxbc74a8de7494494a907f7bf187bc86d5.mailgun.org", {
-//       from: "Mailgun Sandbox <postmaster@sandboxbc74a8de7494494a907f7bf187bc86d5.mailgun.org>",
-//       to: ["Michelle Han <mhan10242019@gmail.com>"],
-//       subject: "Hello Michelle Han",
-//       text: "Congratulations Michelle Han, you just sent an email with Mailgun! You are truly awesome!",
-//     });
-
-//     console.log(data); // logs response data
-//   } catch (error) {
-//     console.log(error); //logs any error
-//   }
-// }

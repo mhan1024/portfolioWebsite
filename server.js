@@ -99,16 +99,25 @@ app.get("/project-flip-params", async (request, response) => {
 
 // CONTACT PAGE
 app.get("/contact", (request, response) => {
-    response.render("contact");
+    let dialNum = request.query.dialNum || 0;
+    let oven_window_display = (dialNum == 2) ? `<div id="resume_form_box" style="background-color:#FF8811;">
+                                                    <h2>Resume Options</h2>
+                                                    <button type="button" value="Preview" id="preview_button">
+                                                        <a href="./Michelle_Han.pdf" target="_blank">Preview</a>
+                                                    </button>
+                                                    <br>
+
+                                                    <button type="button" value="Download" id="download_button">
+                                                        <a href="./Michelle_Han.pdf" download="Michelle_Han_Resume">Download</a>
+                                                    </button>
+                                                    <br>
+
+                                                </div>` : `<hr class="streak">
+                                                        <hr class="streak2">`;
+    response.render("contact", { oven_window_display });
 });
 
-app.post("/contact-form", async (request, response) => {
-    let { contact_name, contact_email, contact_subject, contact_message } = request.body;
 
-    console.log(contact_name, contact_email, contact_subject, contact_message);
-
-    response.render("contact");
-});
 
 // SET UP PAGE (HIDE LATER)
 app.get("/setup", (request, response) => {

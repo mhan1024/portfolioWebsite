@@ -19,13 +19,14 @@ body {
 
     display: flex;
     align-items: center; 
-    justify-content: space-evenly;
+    justify-content: space-between;
+    flex-direction: row;
 
     border-radius: 15px;
 }
 
 .tabInner input[type="button"] {
-    background-color: #F4D06F;
+    background: none;
     border-style: none;
     font-size: 18px;
     padding: 1rem;
@@ -39,6 +40,13 @@ body {
     border-radius: 15px;
 }
 
+#name_tab {
+    margin-left: 1.5rem;
+}
+
+.tab_buttons {
+    margin-right: 0.5rem;
+}
 
 /* Carousel slides */
 .slideshow-container {
@@ -465,8 +473,9 @@ body {
     margin-top: 5rem;
 }
 
-#contact_form_box, #resume_form_box {
+#contact_form_box, #resume_form_box, #socials_box {
     /* background-color: #fff8f0; */
+    width: 100%;
     height: 100%;
     border-radius: 15px;
     display: flex;
@@ -482,28 +491,54 @@ body {
     color: #392F5A;
 }
 
-#contact_form_box > input, #contact_form_box > textarea, #resume_form_box > input, #resume_inline > input {
-    background-color: #fff8f0;
+#contact_form_box > ul {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact_form_box > ul li {
+    display: inline-flex;
+    align-items: center;
+}
+
+#resume_form_box > button {
+    width: 10rem;
+    height: 3rem;
+
+    background-color: #392F5A;
+
     border: none;
     border-radius: 15px;
     padding: 0.5rem;
+}   
 
+#preview_button > a, #download_button > a {
+    color: #fff8f0;
+    text-decoration: none;
 }
 
-#contact_form_box > input[type="submit"], #resume_form_box > input[type="button"], #resume_inline > input[type="button"] {
+
+.fa-linkedin::before, .fa-github::before {
+    scale: 200%;
+}
+
+.fa-linkedin, .fa-github {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    width: 10rem;
+    height: 3rem;
+
     background-color: #392F5A;
     color: #fff8f0;
+    text-decoration: none;
+
+    border: none;
+    border-radius: 15px;
 }
 
-#socials_box {
-    height: 50%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
+ 
 #oven_bottom {
     width: 90%;
 
