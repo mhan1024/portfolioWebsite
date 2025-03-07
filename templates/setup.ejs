@@ -92,8 +92,14 @@
             </section>
         </form>
     
-        <form action="/setup-removeAll" method="post" class="remove_all">
+        <form action="/setup-remove-all" method="post" class="remove_all">
             <input type="submit" value="Remove All">
+        </form>
+
+        <form action="/setup-image-upload" method="post" enctype="multipart/form-data" class="image_upload">
+            <input type="file" name="image_file" id="image_file" accept="image/*">
+            <br>
+            <input type="submit">
         </form>
     </div>
     

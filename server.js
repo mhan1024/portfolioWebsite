@@ -1,47 +1,107 @@
 // Modules
-const fs = require("fs");
+const fs = require('fs').promises;
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const axios = require('axios');
-const { ObjectId } = require("bson");
+// const { ObjectId } = require("bson");
 
-// const FormData = require("form-data");
-// const Mailgun = require("mailgun.js");
+// File uploader
+const multer = require('multer');
+// Configure how and where the (image) file is going to be stored (/images folder)
+// Uploaded image file will also keep its original name 
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './images');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage : storage });
+
+// MONGODB
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const { send } = require("process");
+// AJAX
+const mongoose = require('mongoose');
+const cors = require('cors');
+const { count } = require('console');
 
 // Express
 const portNumber = 5500;
 const app = express();
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/')));
 app.use(express.json());
+
+app.use(cors());
 
 // MONGODB SET UP
 require("dotenv").config({ path: path.resolve(__dirname, '.env') }) 
 const uri = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.7xvdx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-const databaseAndCollection = {db: process.env.MONGO_DB_NAME, collection: process.env.MONGO_COLLECTION};
+const databaseAndCollection = {
+    db: process.env.MONGO_DB_NAME, 
+    collection: process.env.MONGO_COLLECTION
+};
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const { send } = require("process");
-const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
+mongoose.connect(uri)
+    .then(() => console.log("Connected to MongoDB via Mongoose"))
+    .catch(e => console.error(e));
 
-async function connectDB() {
-    try {
-        await client.connect();
-    } catch (err) {
-        console.error("Failed to connect", err);
+const db = mongoose.connection.useDb(process.env.MONGO_DB_NAME);
+const collection = db.collection(process.env.MONGO_COLLECTION);
+
+// Defining MONGOOSE schema 
+const projSchema = new mongoose.Schema({
+    name : {
+        type : String, 
+        require : true
+    }, 
+    lang : {
+        type : String, 
+        require : true
+    },
+    briefDesc : {
+        type : String,
+        require : true
+    }, 
+    longDesc : {
+        type : String,
+        require : true
+    }, 
+    tools : {
+        type : [String],
+        require : true
+    }, 
+    link : {
+        type : String,
+        require : true
+    },
+    topics : {
+        type : [String],
+        require : true
+    }, 
+    count : {
+        type : Number, 
+        default : 0
     }
-}
+});
 
-connectDB();
+// Creating model
+const Project = mongoose.model('Project', projSchema);
+
 process.stdin.setEncoding("utf-8");
 
 
+
 // GLOBAL VAR
-let dessertPicsCount = 3;
+// Get the number of files in the images folder
+let dessertPicsCount = 0;
 let currCards = [];
 let cardCollection = [];
 let cardsIdx = [0, 1, 2];
@@ -52,7 +112,8 @@ let joke = "haha";
 console.log(`Web server started and running at http://localhost:5500`);
 
 app.get("/", async (request, response) => {
-    await getProj(client, databaseAndCollection);
+    dessertPicsCount = await countImages();
+    await getProj(databaseAndCollection);
 
     response.render("index_welcome");
 });
@@ -70,10 +131,10 @@ app.get("/get-joke", async (request, response) => {
 // PROJECTS PAGE
 app.get("/projects", async (request, response) => {
     // Get all document ids and add to cardIds list
-    await getProj(client, databaseAndCollection);
+    await getProj(databaseAndCollection);
     // Build cards for current display 
     // Default indices: 0 - 2
-    await buildCards(client, databaseAndCollection, cardsIdx[0], cardsIdx[2]);
+    await buildCards(cardsIdx[0], cardsIdx[2]);
 
     let card1 = currCards[0];
     let card2 = currCards[1];
@@ -92,7 +153,7 @@ app.post("/projects-receive-name", (request, response) => {
 
 // Server gets and sends data (topics, tools, longDesc, link) to helper.js
 app.get("/project-flip-params", async (request, response) => {
-    let { topics, tools, longDesc, link } = await getFlipParams(client, databaseAndCollection, projName);
+    let { topics, tools, longDesc, link } = await getFlipParams(databaseAndCollection, projName);
 
     response.json({ topics, tools, longDesc, link });
 });
@@ -117,8 +178,6 @@ app.get("/contact", (request, response) => {
     response.render("contact", { oven_window_display });
 });
 
-
-
 // SET UP PAGE (HIDE LATER)
 app.get("/setup", (request, response) => {
     response.render("setup");
@@ -127,52 +186,57 @@ app.get("/setup", (request, response) => {
 app.post("/setup", async (request, response) => {
     let { projectName, projectLang, tools, topics, briefDesc, longDesc, link } = request.body;
 
-    await insertProj(client, databaseAndCollection, projectName, projectLang, briefDesc, longDesc, tools, link, topics);
+    await insertProj(databaseAndCollection, projectName, projectLang, briefDesc, longDesc, tools, link, topics);
 
     response.render("setup");
 });
 
-app.post("/setup-removeAll", async (request, response) => {
-    await removeAll(client, databaseAndCollection);
+app.post("/setup-remove-all", async (request, response) => {
+    await removeAll(databaseAndCollection);
     
     response.render("setup");
 });
 
-async function insertProj(client, databaseAndCollection, name, lang, briefDesc, longDesc, tools, link, topics) {
-    try {
-        let docCount = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).countDocuments();
+app.post("/setup-image-upload", upload.single("image_file"), async (request, response) => {
+    dessertPicsCount = await countImages();
+    await updateProjCount();
+    
+    response.render("setup");
+});
 
+async function insertProj(databaseAndCollection, name, lang, briefDesc, longDesc, tools, link, topics) {
+    try {
+        let docCount = await collection.countDocuments();
         // Calculate the dessert image to use
         let count = docCount % dessertPicsCount;
-        
-        // Create new document and add to database
-        let newProjEntry = {
-            name : name,
+
+        let newProj = new Project({
+            name : name, 
             lang : lang, 
             briefDesc : briefDesc,
-            longDesc : longDesc, 
+            longDesc : longDesc,
             tools : tools,
             link : link,
             topics : topics,
             count : count
-        };
+        });
 
-        await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(newProjEntry);
+        await collection.insertOne(newProj);
 
         // Update card collection list
-        await getProj(client, databaseAndCollection);
+        await getProj(databaseAndCollection);
 
     } catch (e) {
         console.error(e);
     }
 }
 
-async function getProj(client, databaseAndCollection) {
+async function getProj(databaseAndCollection) {
     try {
         // Get all documents from database
-        let results = await client.db(databaseAndCollection.db)
-                            .collection(databaseAndCollection.collection)
-                            .find();
+        let results = await db.collection(databaseAndCollection.collection).find().toArray();
+
+        // console.log(results);
 
         if (results != null) {
             // Add ObjectIds of each document to cardIds
@@ -194,7 +258,7 @@ async function getProj(client, databaseAndCollection) {
     }
 }
 
-async function buildCards(client, databaseAndCollection, start, end) {
+async function buildCards(start, end) {
     try {
         currCards = [];
         let card = "";
@@ -220,10 +284,9 @@ async function buildCards(client, databaseAndCollection, start, end) {
     }
 }
 
-async function removeAll(client, databaseAndCollection) {
+async function removeAll(databaseAndCollection) {
     try {
-        await client.db(databaseAndCollection.db)
-                .collection(databaseAndCollection.collection)
+        await db.collection(databaseAndCollection.collection)
                 .deleteMany();
 
         cardCollection = [];
@@ -233,11 +296,10 @@ async function removeAll(client, databaseAndCollection) {
     }
 }
 
-async function getFlipParams(client, databaseAndCollection, name) {
+async function getFlipParams(databaseAndCollection, name) {
     try {
         let filter = { name : name };
-        let result = await client.db(databaseAndCollection.db)
-                            .collection(databaseAndCollection.collection)
+        let result = await db.collection(databaseAndCollection.collection)
                             .findOne(filter);
         
         let topics = result.topics;
@@ -271,6 +333,39 @@ async function getJoke() {
 	}
 }
 
+async function countImages() {
+    try {
+        const files = await fs.readdir('./images');
+        return files.length - 2;
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+async function updateProjCount() {
+    try {
+        const projects = await db.collection(databaseAndCollection.collection).find().toArray();
+
+        let i = 0;
+
+        for (let p of projects) {
+            let newCount = i % dessertPicsCount;
+
+            await collection.updateOne(
+                { _id : p._id },
+                { $set : { count : newCount } }
+            );
+
+            i++;
+        }
+
+        await getProj(databaseAndCollection);
+
+    } catch (e) {
+        console.error(e);
+    }
+}
 
 // Command line interpreter
 app.listen(portNumber);

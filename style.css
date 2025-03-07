@@ -246,12 +246,19 @@ body {
     flex-direction: column;
 }
 
-.setupForm input[type="submit"], .remove_all input[type="submit"]{
+.image_upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.setupForm input[type="submit"], .remove_all input[type="submit"], .image_upload input[type="submit"]{
     width: 7.5rem;
     height: 2.5rem;
 }
 
-.setupForm input[type="submit"], .remove_all input[type="submit"], .inline_tool_buttons > button, .inline_topic_buttons > button {
+.setupForm input[type="submit"], .remove_all input[type="submit"], .inline_tool_buttons > button, .inline_topic_buttons > button, .image_upload input[type="submit"], .image_upload input::file-selector-button {
     background-color: #F4D06F;
     border: none;
     border-radius: 15px;
@@ -259,9 +266,13 @@ body {
     margin-top: 0.5rem;
 }
 
-.setupForm input[type="submit"]:hover, .remove_all input[type="submit"]:hover, .inline_tool_buttons > button:hover, .inline_topic_buttons > button:hover {
+.setupForm input[type="submit"]:hover, .remove_all input[type="submit"]:hover, .inline_tool_buttons > button:hover, .inline_topic_buttons > button:hover, .image_upload input[type="submit"]:hover, .image_upload input::file-selector-button:hover {
     background-color: #FF8811;
 }
+
+/* .image_upload input::file-selector-button {
+    color: #F4D06F;
+} */
 
 /* ABOUT page */
 #about_body {
