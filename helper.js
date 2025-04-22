@@ -223,6 +223,24 @@ function expandMenu(num) {
         content.style.maxHeight = content.scrollHeight + "px";
     }
 }
+
+/* Creates a type-writer effect on the header when page is loaded */
+
+var txt = 'nice to meet you!';
+var i = 0;
+var speed = 25;
+
+function typeWriterEffect() {
+    
+    if (i < txt.length) {
+        document.getElementById("type-writer").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriterEffect, speed);
+    }
+}
+
+window.onload = typeWriterEffect;
+
 /* ************************************************************************** */
 /* Contact page: */
 

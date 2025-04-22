@@ -20,6 +20,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage : storage });
 
+// Send emails
+const nodemailer = require('nodemailer');
+
 // MONGODB
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const { send } = require("process");
@@ -336,7 +339,15 @@ async function getJoke() {
 async function countImages() {
     try {
         const files = await fs.readdir('./images');
-        return files.length - 2;
+        var total_img = 0;
+
+        files.forEach(img => {
+            if (img.includes('dessert')) {
+                total_img++;
+            }
+        });
+
+        return total_img;
 
     } catch (e) {
         console.error(e);
@@ -366,6 +377,7 @@ async function updateProjCount() {
         console.error(e);
     }
 }
+
 
 // Command line interpreter
 app.listen(portNumber);
