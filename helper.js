@@ -228,7 +228,7 @@ function expandMenu(num) {
 
 var txt = 'nice to meet you!';
 var i = 0;
-var speed = 25;
+var speed = 15;
 
 function typeWriterEffect() {
     

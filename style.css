@@ -1,3 +1,11 @@
+/* Index Page */
+#index_welcome {
+    background-image: url("./images/index_background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 /* Tab header */
 html {
     height: 100%;
