@@ -153,7 +153,7 @@ function flipCard(name, lang) {
         let link = data.link;
 
         let toolsLst = `<ul>`;
-        console.log(Array.isArray(tools));
+        // console.log(Array.isArray(tools));
         if (Array.isArray(tools)) {
             tools.forEach(t => {
                 toolsLst += `<li>${t}</li>`
@@ -164,6 +164,10 @@ function flipCard(name, lang) {
         
         toolsLst += `</ul>`;
 
+        if (Array.isArray(topics)) {
+            topics = topics.join(", ");
+        }
+   
         document.getElementById('inner_proj').innerHTML = `<div class="inner">
             <div class="in-line-title">
                 <h1>${name}</h1>
@@ -184,8 +188,15 @@ function flipCard(name, lang) {
 
                 <div class="description">
                     <h3>Description</h3>
-                    <p>${longDesc}</p>
+                    <p>
+                        ${longDesc}
+                        <br><br>
+                        <a href="#">LINK</a>
+                    </p>
+                    
                 </div>
+
+                
             </div>
         </div>`;
     })
@@ -226,20 +237,51 @@ function expandMenu(num) {
 
 /* Creates a type-writer effect on the header when page is loaded */
 
-var txt = 'nice to meet you!';
-var i = 0;
-var speed = 15;
 
-function typeWriterEffect() {
-    
-    if (i < txt.length) {
-        document.getElementById("type-writer").innerHTML += txt.charAt(i);
-        i++;
-        setTimeout(typeWriterEffect, speed);
-    }
+function typeWriterEffect(elementName, txt, speed=50) {
+    let i = 0;
+
+    const type = () => {
+        if (i < txt.length) {
+            document.getElementById(elementName).innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    };
+
+    type()
 }
 
-window.onload = typeWriterEffect;
+window.onload = () => {
+    let targetId = "";
+
+    if (document.getElementById("type_writer_index") != null) {
+        targetId = "type_writer_index";
+
+    } else if (document.getElementById("type_writer_about") != null){
+        targetId = "type_writer_about";
+
+    } else {
+        targetId = "type_writer_proj";
+        
+    }
+
+    switch(targetId) {
+        case "type_writer_index":
+            typeWriterEffect(targetId, "Creating gentle digital experiences with thoughtful design and a dash of code.");
+            break;
+        case "type_writer_about":
+            typeWriterEffect(targetId, "nice to meet you!");
+            break;
+        case "type_writer_proj":
+            typeWriterEffect(targetId, "Here’s what I’ve been coding lately.");
+            break;
+         
+    }
+
+    
+};
+
 
 /* ************************************************************************** */
 /* Contact page: */
@@ -312,7 +354,3 @@ function resetWindow() {
 }
 
 /* ************************************************************************** */
-/* Welcome page: */
-function contactPage() {
-    window.location.href = "/contact?dialNum=2";
-}

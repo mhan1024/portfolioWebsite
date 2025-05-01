@@ -21,10 +21,10 @@
         </div>
     </header>
     
-    <h1>SET UP</h1>
     <div class="form_outer">
         <form action="/setup" method="post" class="setupForm">
-            <section>
+            <fieldset>
+                <legend>Add a New Project</legend>
                 <div class="form_elements">
                     <input type="text" id="projectName" name="projectName" placeholder="Project Name" autocomplete="off" required>
                     <br>
@@ -89,17 +89,23 @@
     
                     <input type="submit">
                 </div>
-            </section>
+            </fieldset>
         </form>
     
         <form action="/setup-remove-all" method="post" class="remove_all">
-            <input type="submit" value="Remove All">
+            <fieldset>
+                <legend>Delete Projects</legend>
+                <input type="submit" value="Remove All">
+            </fieldset>
         </form>
 
         <form action="/setup-image-upload" method="post" enctype="multipart/form-data" class="image_upload">
-            <input type="file" name="image_file" id="image_file" accept="image/*">
-            <br>
-            <input type="submit">
+            <fieldset>
+                <legend>Upload Image</legend>
+                <input type="file" name="image_file" id="image_file" accept="image/*">
+                <br>
+                <input type="submit">
+            </fieldset>
         </form>
     </div>
     

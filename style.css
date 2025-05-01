@@ -1,11 +1,68 @@
-/* Index Page */
-#index_welcome {
-    background-image: url("./images/index_background.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Shadows+Into+Light&family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+h1, h2, h3, p, button, li, input[type="button"] {
+    font-family: "Quicksand";
 }
 
+h3 {
+    font-weight: normal;
+}
+
+/* Index Page */
+#index_welcome {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#index_overlay {
+
+    position: relative;
+    transition: 0.5s ease;
+    width: 80%;
+}
+
+#index_overlay > img {
+    margin: 0 auto;
+    width: 85%;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+} 
+
+#index_overlay > a {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transition: 0.25s ease;
+
+    opacity: 0;
+
+}
+
+.proj_button {
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+    background-color: #FF8811;
+}
+
+#index_overlay:hover > img {
+    opacity: 0.15;
+    
+}
+
+#index_overlay:hover > a {
+    opacity: 1;
+    
+}
+
+#type_writer_index {
+    font-weight: normal;
+}
 /* Tab header */
 html {
     height: 100%;
@@ -57,6 +114,10 @@ body {
 }
 
 /* Carousel slides */
+.carousel_display {
+    margin-top: 2.5rem;
+}
+
 .slideshow-container {
     display: flex;
     justify-content: space-around;
@@ -83,7 +144,9 @@ body {
     flex-direction: row;
     align-items: center;
 
-    width: fit-content;
+    width: 100%;
+    height: 100%;
+
 
     text-decoration: none;
 
@@ -91,6 +154,7 @@ body {
 }
 
 .img-button {
+
     background-color: #fff8f0;
     border-style: none;
     border-radius: 10px;
@@ -104,6 +168,7 @@ body {
 }
 
 .img-button > img {
+    
     height: 12.5rem;
 }
 
@@ -126,6 +191,11 @@ body {
 
 .project-info {
     margin-left: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* allow wrapping */
+    word-break: break-word;
+
 }
 
 #prev_button, #next_button {
@@ -218,12 +288,23 @@ body {
     border-left: 2px solid #392F5A;
 }
 
+#type_writer_proj {
+    font-weight: normal;
+    font-size: larger;
+}
 /* SET UP page */
 .form_outer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+fieldset {
+    margin-top: 2rem;
+    border: 1px solid #392F5A;
+    border-radius: 15px;
+    padding: 1rem;
 }
 
 .setupForm input[type="text"], .setupForm input{
@@ -586,4 +667,33 @@ body {
     border-radius: 0 0 15px 15px;
     
     margin-right: 1rem;
+}
+
+/* Projects page */
+#proj_header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#more_info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 2.5rem;
+}
+
+#git_button {
+    background-color: #F4D06F;
+    border: none;
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#git_button:hover {
+    background-color: #FF8811;
 }

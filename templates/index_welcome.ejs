@@ -12,13 +12,23 @@
     <script src="./server.js"></script>
 </head>
 
-<body id="index_welcome">
+<body>
     <header>
         <div class="tabOuter">
             <%- include('./nav_bar') %>
             
         </div>
     </header>
+
+    <div id="index_welcome">
+        <h1 id="type_writer_index"></h1>
+        
+        <div id="index_overlay">
+            <img src="./images/index_background.png" alt="background image">
+            <a href="/projects" class="proj_button"><button class="proj_button">Explore My Projects</button></a>
+        </div>
+    </div>
+    
 
     <!-- <button id="contact_page_button" onclick='contactPage()'>Resume</button> -->
 </body>
