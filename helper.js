@@ -214,7 +214,10 @@ function getJokeHelper() {
     fetch('/get-joke')
     .then(response => response.json())
     .then(data => {
-        document.querySelector(".joke_box").innerHTML = `<p>${data.joke}</p>`;
+        document.querySelector("#joke_box").innerHTML = `<p>${data.joke}</p>
+        <button type="button" id="joke_button" onclick='getJokeHelper()'>
+                                New Joke
+                            </button>`;
     })
     .catch(error => console.error("Error: ", error));
 }

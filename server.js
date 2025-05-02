@@ -132,6 +132,7 @@ app.get("/about", async (request, response) => {
 
 app.get("/get-joke", async (request, response) => {
     joke = await getJoke();
+
     response.json({ joke });
 });
 
