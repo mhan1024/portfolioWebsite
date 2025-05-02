@@ -2,6 +2,8 @@
 
 h1, h2, h3, p, button, li, input[type="button"] {
     font-family: "Quicksand";
+    color: #392F5A;
+    /* color: #572211; */
 }
 
 h3 {
@@ -9,6 +11,7 @@ h3 {
 }
 
 /* Index Page */
+
 #index_welcome {
     display: flex;
     justify-content: center;
@@ -18,7 +21,6 @@ h3 {
 }
 
 #index_overlay {
-
     position: relative;
     transition: 0.5s ease;
     width: 80%;
@@ -365,7 +367,8 @@ fieldset {
 
 /* ABOUT page */
 #about_body {
-    background-color: #392F5A;
+    background-image: url("./images/background_dark.png");
+    background-size: contain;
 }
 
 #about_inner {
@@ -374,18 +377,22 @@ fieldset {
     justify-content: center;
 
     flex-direction: row;
-
-    /* height: 200%; */
 }
 
 #about_left {
-    /* height: 100vh; */
+    position: sticky;
     width: 30%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+}
+
+#type_writer_about {
+    position: relative;
+    margin: 0;
 }
 
 #about_right {
@@ -444,9 +451,17 @@ fieldset {
     color: #fff8f0;
 }
 
+#joke_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #joke_button {
     background-color: #392F5A;
     color: #fff8f0;
+    border-style: none;
     border-radius: 15px;
     margin-bottom: 1rem;
 }
@@ -670,6 +685,11 @@ fieldset {
 }
 
 /* Projects page */
+#index_body, #proj_body {
+    background-image: url("./images/background.png");
+    background-size: contain;
+    background-repeat: none;
+}
 #proj_header {
     width: 100%;
     display: flex;

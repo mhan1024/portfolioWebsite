@@ -122,7 +122,11 @@ app.get("/", async (request, response) => {
 });
 
 app.get("/about", async (request, response) => {
-    // joke = await getJoke();
+    if (joke == "haha") {
+        joke = await getJoke();
+    }
+
+
     response.render("about", { joke });
 });
 

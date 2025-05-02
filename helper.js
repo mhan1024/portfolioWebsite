@@ -191,7 +191,7 @@ function flipCard(name, lang) {
                     <p>
                         ${longDesc}
                         <br><br>
-                        <a href="#">LINK</a>
+                        <a href="${link}" target="_blank">Check out the github repo.</a>
                     </p>
                     
                 </div>
@@ -274,7 +274,7 @@ window.onload = () => {
             typeWriterEffect(targetId, "nice to meet you!");
             break;
         case "type_writer_proj":
-            typeWriterEffect(targetId, "Here’s what I’ve been coding lately.");
+            typeWriterEffect(targetId, "Here’s what I’ve been coding lately!");
             break;
          
     }
@@ -317,7 +317,7 @@ function changeWindow(dialNum) {
             break;
         case 2:
             window.innerHTML = `<div id="resume_form_box">
-                                    <h2>Resume Options</h2>
+                                    <h2>R&#233;sum&#233; Options</h2>
                                     <button type="button" value="Preview" id="preview_button">
                                         <a href="./Michelle_Han.pdf" target="_blank">Preview</a>
                                     </button>
@@ -354,3 +354,17 @@ function resetWindow() {
 }
 
 /* ************************************************************************** */
+/* Ensures that each card is the same height for the projects carousel. */
+window.addEventListener('load', () => {
+    const cards = document.querySelectorAll('.cards');
+    let maxHeight = 0;
+
+    cards.forEach(card => {
+        const height = card.offsetHeight;
+        if (height > maxHeight) maxHeight = height;
+    });
+
+    cards.forEach(card => {
+        card.style.height = maxHeight + 'px';
+    });
+});
