@@ -211,8 +211,6 @@ function off() {
 /* ************************************************************************** */
 /* About page: */
 function getJokeHelper() {
-    alert("BUTTON CLICKED: NEW JOKE");
-
     fetch('/get-joke')
     .then(response => response.json())
     .then(data => {
